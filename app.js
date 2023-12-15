@@ -1,7 +1,10 @@
 require('dotenv').config();
+
 const express = require('express');
-const connectDB = require('./db/connect');
 const app = express();
+
+const connectDB = require('./db/connect');
+const stylesRouter = require('./routes/styles');
 
 //async errors
 
@@ -18,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 // style routes
+app.use('/api/v1/styles', stylesRouter);
 app.use(notFound);
 app.use(customErrorHandler);
 
