@@ -14,9 +14,7 @@ const queryfun = (query) => {
   if (color) {
     queryObject.color = color;
   }
-  if (likes) {
-    queryObject.likes = likes;
-  }
+
   return queryObject;
 };
 
