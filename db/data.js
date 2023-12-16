@@ -1,6 +1,34 @@
 const db__filter = (query) => {
-  const { featured, search, likes, color, createdAt } = query;
+  const { featured, search, color, _id, numericFilter } = query;
   const queryObject = {};
+  if (_id) {
+    // search by id should not be paired with another filters
+    queryObject._id = _id;
+    return queryObject;
+  }
+
+  if (numericFilter) {
+    const operatorMap = {
+      '>': '$gt',
+      '>=': '$gte',
+      '=': '$eq',
+      '<': '$lt',
+      '<=': '$lte',
+    };
+
+    const regex = /\b(<|>|>=|=|<|<=)\b/g;
+    let filters = numericFilter.replace(
+      regex,
+      (match) => ` ${operatorMap[match]} `
+    );
+    const options = ['likes', 'createdAt'];
+    filters = filters.split(',').forEach((item) => {
+      const [field, op, value] = item.split(' ');
+      if (options.includes(field)) {
+        queryObject[field] = { [op]: Number(value) };
+      }
+    });
+  }
 
   if (featured) {
     queryObject.featured = featured === 'true' ? true : false;
