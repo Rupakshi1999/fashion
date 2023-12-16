@@ -1,14 +1,14 @@
 const Styles = require('../models/styles');
 
 const db_query = (query) => {
-  const { featured, name, likes, color, createdAt } = query;
+  const { featured, search, likes, color, createdAt } = query;
   const queryObject = {};
 
   if (featured) {
     queryObject.featured = featured === 'true' ? true : false;
   }
-  if (name) {
-    queryObject.name = name;
+  if (search) {
+    queryObject.title = { $regex: search, $options: 'i' };
   }
 
   if (color) {
