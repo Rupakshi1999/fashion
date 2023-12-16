@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getAllStyles } = require('../controllers/styles');
+const { getStyles } = require('../controllers/styles');
 
-router.get('/', getAllStyles);
+router.get('/', getStyles);
 
 module.exports = router;
