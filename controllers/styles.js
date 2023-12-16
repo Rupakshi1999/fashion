@@ -8,7 +8,10 @@ const db_query = (query) => {
     queryObject.featured = featured === 'true' ? true : false;
   }
   if (search) {
-    queryObject.title = { $regex: search, $options: 'i' };
+    queryObject.title = {
+      $regex: search,
+      $options: 'i',
+    };
   }
 
   if (color) {
