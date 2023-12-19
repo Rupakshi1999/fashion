@@ -1,25 +1,20 @@
 const User = require('../models/User');
 const { StatusCodes } = require('http-status-codes');
-const bryptjs = require('bcryptjs');
 
 const register = async (req, res) => {
-  const { first, last, email, password } = req.body;
-  console.log(req.body);
-
+  // validate password length
+  const { password } = req.body;
   if (password) {
     if (password.length < 6 || password.length > 30) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .send(
-          'Please create password with atleast 6 characters and atmost 30 characters'
+          'Please create password with at least 6 characters and at most 30 characters'
         );
     }
   }
 
-  const salt = await bryptjs.genSalt(10);
-  const hash = await bryptjs.hash(password, salt);
-  const userInfo = { first, last, email, password: hash };
-  const user = await User.create({ ...userInfo });
+  const user = await User.create({ ...req.body });
   return res.status(StatusCodes.CREATED).send(`register ${user}`);
 };
 

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const bcryptjs = require('bcryptjs');
+const { StatusCodes } = require('http-status-codes');
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   first: {
     type: String,
     required: [true, 'Please provide first name'],
@@ -28,4 +30,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('User', userSchema);
+UserSchema.pre('save', async function (next) {
+  // encrypt the password before staoring it to the db
+  const salt = await bcryptjs.genSalt(10);
+  const hash = await bcryptjs.hash(this.password, salt);
+  this.password = hash;
+  console.log(this);
+  next();
+});
+
+module.exports = mongoose.model('User', UserSchema);
