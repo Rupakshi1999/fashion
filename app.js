@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
   res.send('<h1>Styles API</h1><a href = "/api/v1/styles">API route</a>');
 });
 
+// auth routes
+const authRouter = require('./routes/auth');
+app.use('/api/v1/auth', authRouter);
+
 // style routes
 app.use('/api/v1/styles', stylesRouter);
 app.use(notFound);
