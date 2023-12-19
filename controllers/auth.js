@@ -16,9 +16,9 @@ const register = async (req, res) => {
     }
   }
 
-  // const salt = await bryptjs.genSalt(10);
-  // const hash = await bryptjs.hash(password, salt);
-  const userInfo = { first, last, email, password };
+  const salt = await bryptjs.genSalt(10);
+  const hash = await bryptjs.hash(password, salt);
+  const userInfo = { first, last, email, password: hash };
   const user = await User.create({ ...userInfo });
   return res.status(StatusCodes.CREATED).send(`register ${user}`);
 };
