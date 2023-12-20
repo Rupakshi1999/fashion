@@ -6,8 +6,7 @@ const app = express();
 
 const connectDB = require('./db/connect');
 const stylesRouter = require('./routes/styles');
-
-//async errors
+const authenticateUser = require('./middleware/authentication');
 
 //custom error handler middlewares
 const notFound = require('./middleware/not-found');
@@ -16,17 +15,12 @@ const customErrorHandler = require('./middleware/error-handler');
 // middleware
 app.use(express.json());
 
-// routes
-app.get('/', (req, res) => {
-  res.send('<h1>Styles API</h1><a href = "/api/v1/styles">API route</a>');
-});
-
 // auth routes
 const authRouter = require('./routes/auth');
 app.use('/api/v1/auth', authRouter);
 
 // style routes
-app.use('/api/v1/styles', stylesRouter);
+app.use('/api/v1/styles', [authenticateUser, stylesRouter]);
 app.use(notFound);
 app.use(customErrorHandler);
 

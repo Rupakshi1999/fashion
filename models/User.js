@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
-const { StatusCodes } = require('http-status-codes');
+const jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
   first: {
@@ -38,5 +38,20 @@ UserSchema.pre('save', async function (next) {
   console.log(this);
   next();
 });
+
+UserSchema.methods.createJWT = function () {
+  return jwt.sign(
+    { UserID: this._id, name: this.first + ' ' + this.last },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_LIFETIME,
+    }
+  );
+};
+
+UserSchema.methods.checkPassword = async function (password) {
+  const isMatch = await bcryptjs.compare(password, this.password);
+  return isMatch;
+};
 
 module.exports = mongoose.model('User', UserSchema);
