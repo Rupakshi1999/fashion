@@ -31,7 +31,9 @@ app.use(cors());
 app.use(xss());
 
 app.get('/', (req, res) => {
-  res.send('Working with api');
+  res.send(
+    '<h1><a href="/api/v1/auth/login"> Login</a></h1><h1><a href="/api/v1/auth/register"> Register</a></h1><h1><a href="/api/v1/jobs"> Get/Create Jobs</a></h1>'
+  );
 });
 // auth routes
 const authRouter = require('./routes/auth');
