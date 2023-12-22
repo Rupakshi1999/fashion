@@ -1,6 +1,7 @@
-const jobs__filter = (query) => {
-  const { search, liked, stage, createdAt } = query;
+const jobs__filter = (req) => {
+  const { search, liked, stage } = req.query;
   const queryObject = {};
+  queryObject.createdBy = req.user.userID;
 
   if (liked) {
     queryObject.liked = liked === 'true' ? true : false;
