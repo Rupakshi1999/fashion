@@ -1,14 +1,14 @@
 require('dotenv').config();
 const connectDB = require('./db/connect');
-const Style = require('./models/styles');
+const Jobs = require('./models/styles');
 
-const jsonStyles = require('./styles.json');
+const jsonJobs = require('./styles.json');
 
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    await Style.deleteMany(); // clean the data
-    await Style.create(jsonStyles);
+    await Jobs.deleteMany(); // clean the data
+    await Jobs.create(jsonJobs);
     console.log('success!');
     process.exit(0);
   } catch (err) {

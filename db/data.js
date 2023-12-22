@@ -1,9 +1,9 @@
-const db__filter = (query) => {
-  const { featured, search, likes, color, createdAt } = query;
+const jobs__filter = (query) => {
+  const { search, liked, stage, createdAt } = query;
   const queryObject = {};
 
-  if (featured) {
-    queryObject.featured = featured === 'true' ? true : false;
+  if (liked) {
+    queryObject.liked = liked === 'true' ? true : false;
   }
   if (search) {
     queryObject.title = {
@@ -12,13 +12,13 @@ const db__filter = (query) => {
     };
   }
 
-  if (color) {
-    queryObject.color = color;
+  if (stage) {
+    queryObject.stage = stage;
   }
 
   return queryObject;
 };
-const db_order = (query) => {
+const sort_jobs = (query) => {
   const { sort } = query;
   if (sort) {
     const sortList = sort.split(',').join(' ');
@@ -28,7 +28,7 @@ const db_order = (query) => {
   }
 };
 
-const db_fields = (query) => {
+const get_specified_fields = (query) => {
   const { fields } = query;
   if (fields) {
     const porpertyList = fields.split(',').join(' ');
@@ -37,7 +37,7 @@ const db_fields = (query) => {
 };
 
 module.exports = {
-  db__filter,
-  db_order,
-  db_fields,
+  jobs__filter,
+  sort_jobs,
+  get_specified_fields,
 };

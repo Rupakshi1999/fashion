@@ -11,7 +11,7 @@ const express = require('express');
 const app = express();
 
 const connectDB = require('./db/connect');
-const stylesRouter = require('./routes/styles');
+const jobsRouter = require('./routes/jobs');
 const authenticateUser = require('./middleware/authentication');
 
 //custom error handler middlewares
@@ -38,7 +38,7 @@ const authRouter = require('./routes/auth');
 app.use('/api/v1/auth', authRouter);
 
 // style routes
-app.use('/api/v1/styles', [authenticateUser, stylesRouter]);
+app.use('/api/v1/jobs', [authenticateUser, jobsRouter]);
 app.use(notFound);
 app.use(customErrorHandler);
 
