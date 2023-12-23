@@ -1,6 +1,7 @@
 const { jobs__filter, sort_jobs, get_specified_fields } = require('../db/data');
 const { NotFoundError, BadRequestError } = require('../errors/index');
 const Jobs = require('../models/Jobs');
+const { StatusCodes } = require('http-status-codes');
 
 const getAllJobs = async (req, res) => {
   let result = Jobs.find(jobs__filter(req))
@@ -17,14 +18,14 @@ const getAllJobs = async (req, res) => {
   if (!jobs) {
     throw new NotFoundError(`no data with query ${req.query}`);
   }
-  return res.status(200).json({ nmHits: jobs.length, jobs });
+  return res.status(StatusCodes.OK).json({ nmHits: jobs.length, jobs });
 };
 
 const createJob = async (req, res) => {
   req.body.createdBy = req.user.userID;
   const job = await Jobs.create(req.body);
 
-  return res.status(200).json({ job });
+  return res.status(StatusCodes.OK).json({ job });
 };
 
 const getJob = async (req, res) => {
@@ -36,7 +37,7 @@ const getJob = async (req, res) => {
   if (!job) {
     throw new NotFoundError(`no job with id ${JobID}`);
   }
-  return res.status(200).json({ job });
+  return res.status(StatusCodes.OK).json({ job });
 };
 
 const updateJob = async (req, res) => {
@@ -59,7 +60,7 @@ const updateJob = async (req, res) => {
   if (!job) {
     throw new NotFoundError(`no job with id ${JobID}`);
   }
-  return res.status(200).json({ job });
+  return res.status(StatusCodes.OK).json({ job });
 };
 
 const deleteJob = async (req, res) => {
@@ -71,7 +72,7 @@ const deleteJob = async (req, res) => {
   if (!job) {
     throw new NotFoundError(`no job with id ${JobID}`);
   }
-  return res.status(200).send();
+  return res.status(StatusCodes.OK).send();
 };
 
 module.exports = {
