@@ -37,6 +37,10 @@ const getJob = async (req, res) => {
   if (!job) {
     throw new NotFoundError(`no job with id ${JobID}`);
   }
+  console.log(job);
+  let resume;
+  if (job.file) {
+  }
   return res.status(StatusCodes.OK).json({ job });
 };
 
