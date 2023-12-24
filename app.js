@@ -13,7 +13,7 @@ const app = express();
 const connectDB = require('./db/connect');
 const jobsRouter = require('./routes/jobs');
 const authenticateUser = require('./middleware/authentication');
-
+const path = require('path');
 //custom error handler middlewares
 const notFound = require('./middleware/not-found');
 const customErrorHandler = require('./middleware/error-handler');
@@ -24,8 +24,9 @@ app.set('trust proxy', 1);
 // limit each IP to 100 requests per window
 app.use(rateLimitter({ windowMS: 15 * 60 * 1000, max: 100 }));
 
-// // make resumes avaiable to clients
-// app.use(express.static('./resumes'));
+// app.use(
+//   express.static(path.resolve(__dirname, './client/application-tracker/build'))
+// );
 
 // middleware to read json data
 app.use(express.json());
