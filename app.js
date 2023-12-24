@@ -24,9 +24,9 @@ app.set('trust proxy', 1);
 // limit each IP to 100 requests per window
 app.use(rateLimitter({ windowMS: 15 * 60 * 1000, max: 100 }));
 
-app.use(
-  express.static(path.resolve(__dirname, './client/application-tracker/build'))
-);
+// app.use(
+//   express.static(path.resolve(__dirname, './client/application-tracker/build'))
+// );
 
 // middleware to read json data
 app.use(express.json());

@@ -16,14 +16,5 @@ function Job(props) {
     </article>
   );
 }
-// function Title() {
-//   return <h2>Title</h2>;
-// }
-// function Company() {
-//   return <h2>Company</h2>;
-// }
-// function Status() {
-//   return <h2>Status</h2>;
-// }
 
 export default Job;

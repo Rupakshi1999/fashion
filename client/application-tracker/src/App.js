@@ -1,6 +1,7 @@
-import AddJobs from './jobs/AddJobs';
-import Auth from './auth/Auth';
-import Jobs from './jobs/Jobs';
+import AddJobs from './components/jobs/AddJobs';
+import Auth from './components/auth/Auth';
+import Jobs from './components/jobs/JobList';
+import './axios/global';
 
 function App() {
   return (

@@ -11,6 +11,46 @@ body {
   color: #222;
 }
 
+label {
+  text-align: right;
+  clear: both;
+  float: left;
+  margin-right: 15px;
+}
+
+form {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+form label {
+  color: #617d98;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  letter-spacing: 2px;
+}
+
+form input {
+  margin: 1rem;
+  border-radius: 0.5rem;
+  border-color: #f1f5f1;
+}
+
+button {
+  margin: 1rem;
+
+  background-color: #617d98; /* Green */
+  border: none;
+  color: white;
+  padding: 3px 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 0.5rem;
+}
+
 .joblist {
   width: 90vw;
   max-width: 1170px;
@@ -50,32 +90,12 @@ body {
   letter-spacing: 2px;
 }
 
-form input {
-  margin: 1rem;
-  border-radius: 0.5rem;
-  border-color: #f1f5f1;
-}
-
 .auth {
   margin: 1rem;
 }
 
 .auth h2 {
   color: #08a269;
-}
-
-button {
-  margin: 1rem;
-
-  background-color: #617d98; /* Green */
-  border: none;
-  color: white;
-  padding: 3px 6px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  border-radius: 0.5rem;
 }
 
 .login {
