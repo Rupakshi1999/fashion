@@ -1,5 +1,4 @@
 const express = require('express');
-const { route } = require('./auth');
 const router = express.Router();
 const {
   getAllJobs,
@@ -8,11 +7,13 @@ const {
   updateJob,
   deleteJob,
 } = require('../controllers/jobs');
+const { uploadResume } = require('../controllers/upload');
 
 router.get('/', getAllJobs);
 router.post('/', createJob);
 router.get('/:id', getJob);
 router.patch('/:id', updateJob);
 router.delete('/:id', deleteJob);
+router.post('/uploadResume', uploadResume);
 
 module.exports = router;

@@ -47,9 +47,9 @@ app.get('/', (req, res) => {
 const authRouter = require('./routes/auth');
 app.use('/api/v1/auth', authRouter);
 
-// Resume uploader router
-const resumeRouter = require('./routes/resume');
-app.use('/api/v1/resumes', [authenticateUser, resumeRouter]);
+// get uploaded files
+const filesRouter = require('./routes/files');
+app.use('/api/v1/files', [authenticateUser, filesRouter]);
 
 // Job routes
 app.use('/api/v1/jobs', [authenticateUser, jobsRouter]);

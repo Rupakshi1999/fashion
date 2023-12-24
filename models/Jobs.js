@@ -37,6 +37,9 @@ const JobsSchema = new mongoose.Schema(
     resume: {
       type: String,
     },
+    coverLetter: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
