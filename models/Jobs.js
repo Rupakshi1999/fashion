@@ -34,6 +34,12 @@ const JobsSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Please provide a user'],
     },
+    resume: {
+      type: String,
+    },
+    coverLetter: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -18,26 +18,40 @@ const authenticateUser = require('./middleware/authentication');
 const notFound = require('./middleware/not-found');
 const customErrorHandler = require('./middleware/error-handler');
 
+const fileupload = require('express-fileupload');
 // Hosting the project on cloud proxy
 app.set('trust proxy', 1);
 // limit each IP to 100 requests per window
 app.use(rateLimitter({ windowMS: 15 * 60 * 1000, max: 100 }));
 
-// middleware
+// // make resumes avaiable to clients
+// app.use(express.static('./resumes'));
+
+// middleware to read json data
 app.use(express.json());
+
 // security packages middleware
 app.use(helmet());
 app.use(cors());
 app.use(xss());
 
+// file upload middleware
+app.use(fileupload());
+
 app.get('/', (req, res) => {
-  res.send('Working with api');
+  res.send(
+    '<h1><a href="/api/v1/auth/login"> Login</a></h1><h1><a href="/api/v1/auth/register"> Register</a></h1><h1><a href="/api/v1/jobs"> Get/Create Jobs</a></h1>'
+  );
 });
 // auth routes
 const authRouter = require('./routes/auth');
 app.use('/api/v1/auth', authRouter);
 
-// style routes
+// get uploaded files
+const filesRouter = require('./routes/files');
+app.use('/api/v1/files', [authenticateUser, filesRouter]);
+
+// Job routes
 app.use('/api/v1/jobs', [authenticateUser, jobsRouter]);
 app.use(notFound);
 app.use(customErrorHandler);

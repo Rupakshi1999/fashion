@@ -2,6 +2,8 @@ const { jobs__filter, sort_jobs, get_specified_fields } = require('../db/data');
 const { NotFoundError, BadRequestError } = require('../errors/index');
 const Jobs = require('../models/Jobs');
 const { StatusCodes } = require('http-status-codes');
+const { check_file_perm, check_file_exists } = require('./file_validators');
+const path = require('path');
 
 const getAllJobs = async (req, res) => {
   let result = Jobs.find(jobs__filter(req))
@@ -23,9 +25,20 @@ const getAllJobs = async (req, res) => {
 
 const createJob = async (req, res) => {
   req.body.createdBy = req.user.userID;
-  const job = await Jobs.create(req.body);
+  const { resume, coverletter } = req.body;
+  // validate that if a resume and cover letter src is given
+  // It must be available and owned by the user
+  if (resume) {
+    check_file_perm(resume, req.user.userID);
+    check_file_exists(path.join(__dirname, '..', resume), 'resume');
+  }
+  if (coverletter) {
+    check_file_perm(coverletter, req.user.userID);
+    check_file_exists(path.join(__dirname, '..', coverletter), 'coverLetter');
+  }
 
-  return res.status(StatusCodes.OK).json({ job });
+  const job = await Jobs.create(req.body);
+  return res.status(StatusCodes.CREATED).json({ job });
 };
 
 const getJob = async (req, res) => {
@@ -37,6 +50,7 @@ const getJob = async (req, res) => {
   if (!job) {
     throw new NotFoundError(`no job with id ${JobID}`);
   }
+
   return res.status(StatusCodes.OK).json({ job });
 };
 
@@ -44,11 +58,22 @@ const updateJob = async (req, res) => {
   const {
     user: { userID },
     params: { id: JobID },
-    body: { company, title },
+    body: { company, title, resume, coverletter },
   } = req;
   if (company === '' || title === '') {
     throw new BadRequestError('Please provide company and title');
   }
+  // validate that if a resume and cover letter src is given
+  // It must be available and owned by the user
+  if (resume) {
+    check_file_perm(resume, userID);
+    check_file_exists(path.join(__dirname, '..', resume), 'resume');
+  }
+  if (coverletter) {
+    check_file_perm(coverletter, req.user.userID);
+    check_file_exists(path.join(__dirname, '..', coverletter), 'coverLetter');
+  }
+
   let job = await Jobs.findOneAndUpdate(
     { _id: JobID, createdBy: userID },
     { company, title },
