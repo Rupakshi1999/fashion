@@ -1,11 +1,9 @@
 Accessing the API:
 GET request:
-Get All
-Get by ID
-Get after filtering
-Get after filtering and sorting
-
-By default every page contains 10 values
+  Get All
+  Get by ID
+  Get after filtering
+  Get after filtering and sorting
 
 #### User Model
 
@@ -25,10 +23,8 @@ Email Validation Regex
 
 #### Login User
 
-- Validate - email, password - in controller
+- Validate - email, password
 - If email or password is missing, throw BadRequestError
-- Find User
-- Compare Passwords
 - If no user or password does not match, throw UnauthenticatedError
 - If correct, generate Token
 - Send Response with Token
