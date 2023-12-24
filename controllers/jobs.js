@@ -4,6 +4,7 @@ const Jobs = require('../models/Jobs');
 const { StatusCodes } = require('http-status-codes');
 const { check_file_perm, check_file_exists } = require('./file_validators');
 const path = require('path');
+
 const getAllJobs = async (req, res) => {
   let result = Jobs.find(jobs__filter(req))
     .sort(sort_jobs(req.query))
