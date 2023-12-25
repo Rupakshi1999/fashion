@@ -9,7 +9,27 @@ With the current job market there's a consistent need to update resumes to fit d
 
 #### Future plans: 
 Adding graphs to easliy visualize the stages of different job applications. My plan is to show different metrics like performance by job title or required skills for a job to help understand the roles that best fit the users current skills and also highlight skills that are missing based on weather the user Interview rounds with companies. 
-
+### Set up: 
+	- [ ] Fork this github Repo
+	- [ ] Clone your Froked Repo to your local environment 
+	- [ ] Cd into the Project directory
+	- [ ] run `npm install` to get all the local dependencies
+	- [ ] add .env file with the following values: 
+```
+MONGO_PASSWORD = 
+MONGO_URI = 
+JWT_SECRET = 
+JWT_LIFETIME = 20d
+```
+#### _Server_: 
+- [ ] Server will run on port 4000 unless a PORT variable is added to .env
+- [ ] From the Project directory run `npm start` or `npm run dev`
+  
+#### _Client_: 
+- [ ] Client will run on port 3000
+- [ ] `cd '/job-tracker/client/application-tracker'`
+- [ ] Run `npm start`
+  
 ### Accessing the API:
 #### _Jobs_
 #### _Login/register_
@@ -20,7 +40,8 @@ Adding graphs to easliy visualize the stages of different job applications. My p
   
 
 ### Models
-#### _User Model_
+#### _User_ Model
+#### _Jobs_ Model
 
 Email Validation Regex
 
