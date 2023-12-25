@@ -40,7 +40,9 @@ JWT_LIFETIME = 20d
 ### Models
 _User_ Model, _Jobs_ Model
 
-Email Validation Regex
+### Validation rules 
+
+#### Email Validation Regex
 
 ```regex
 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
