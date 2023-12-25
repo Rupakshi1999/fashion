@@ -2,6 +2,14 @@
 
 ### Description
 
+Web application to keep track of job application statuses and easily navigate history of job applications. Useful feature to upload resumes for each job application to help with keeping track of different resume and cover letter versions that were used to apply for a particular role.  
+
+#### Inspiration:
+With the current job market there's a consistent need to update resumes to fit description/keywords of each role. Sometimes we need to apply to 100s of roles because we get an offer and in the midst of all that it's easy to forget the resume we used to apply for a posting. Over time we also loose sight of how much we have improved and by goal is to make the job hunting process more streamline, as well help us all see growth in our skills over the years.
+
+#### Future plans: 
+Adding graphs to easliy visualize the stages of different job applications. My plan is to show different metrics like performance by job title or required skills for a job to help understand the roles that best fit the users current skills and also highlight skills that are missing based on weather the user Interview rounds with companies. 
+
 ### Accessing the API:
 #### _Jobs_
 #### _Login/register_
