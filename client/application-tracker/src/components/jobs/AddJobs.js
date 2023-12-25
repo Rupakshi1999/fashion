@@ -36,8 +36,8 @@ const AddJobs = () => {
 
   return (
     <section>
-      <h2>Add Jobs to track</h2>
       <form>
+        <h2>Enter job information</h2>
         <label>Position</label>
         <input
           type="text"
@@ -54,15 +54,18 @@ const AddJobs = () => {
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
-
+        <label className="file-label">Select Resume</label>
         <input
+          className="file-input"
           type="file"
           name="resume"
           id="resume"
           value={resume}
           onChange={handleUpload}
         />
+        <label className="file-label">Cover Letter</label>
         <input
+          className="file-input"
           type="file"
           name="coverLetter"
           id="coverLetter"
