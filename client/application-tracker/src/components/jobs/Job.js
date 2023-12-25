@@ -3,7 +3,7 @@ import Resume from './Resume';
 
 function Job(props) {
   console.log(props);
-  const { company, title, status, dateCreated } = props.job;
+  const { company, title, status, dateCreated } = props;
 
   return (
     <article className="job">

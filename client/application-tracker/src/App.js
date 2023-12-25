@@ -1,14 +1,11 @@
-import AddJobs from './components/jobs/AddJobs';
 import Auth from './components/auth/Auth';
-import Jobs from './components/jobs/JobList';
+import JobPaths from './components/jobs/JobPaths';
 import './axios/global';
 
 function App() {
   return (
     <div>
-      <Auth />
-      <AddJobs />
-      <Jobs />
+      <JobPaths />
     </div>
   );
 }

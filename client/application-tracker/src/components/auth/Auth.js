@@ -1,11 +1,11 @@
 import Login from './Login';
 import Register from './Register';
 
-function Auth() {
+function Auth({ setToken }) {
   return (
     <div className="auth">
-      <Register />
-      <Login />
+      <Register setToken={setToken} />
+      <Login setToken={setToken} />
     </div>
   );
 }

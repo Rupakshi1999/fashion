@@ -1,16 +1,22 @@
 import post from '../../axios/post';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    const response = await post('auth/login', {
-      email,
-      password,
-    });
-    console.log(response.data);
+    try {
+      const response = await post('auth/login', {
+        email,
+        password,
+      });
+      console.log(typeof setToken);
+      props.setToken(response.data.token);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -37,6 +43,10 @@ const Login = () => {
       <button onClick={handleLogin}>Submit</button>
     </section>
   );
+};
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
 };
 
 export default Login;
