@@ -1,20 +1,25 @@
 import { useState } from 'react';
 import post from '../../axios/post';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ setToken }) => {
   const [first, setFirst] = useState('');
   const [last, setLast] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async () => {
-    const response = await post('auth/register', {
-      first,
-      last,
-      email,
-      password,
-    });
-    console.log(response);
+    try {
+      const response = await post('auth/register', {
+        first,
+        last,
+        email,
+        password,
+      });
+      setToken(response.data.token);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -57,6 +62,10 @@ const Register = () => {
       <button onClick={handleRegister}>Submit</button>
     </section>
   );
+};
+
+Register.propTypes = {
+  setToken: PropTypes.func.isRequired,
 };
 
 export default Register;

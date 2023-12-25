@@ -1,35 +1,45 @@
 import { useState } from 'react';
 import post from '../../axios/post';
 
-const AddJobs = () => {
+const AddJobs = ({ token }) => {
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
-  const [resume, setResume] = useState('');
+  const [resumeSrc, setResume] = useState('');
 
-  const handleSubmit = async () => {
+  const headers = {
+    authorization: `Bearer ${token}`,
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    console.log('uploading');
     try {
-      const response = await post('jobs', {
-        title,
-        company,
-        resume,
-      });
-      console.log(response);
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('resume', file);
+      headers['Content-type'] = 'multipart/form-data';
+      const { data } = await post('jobs/uploadResume', formData, headers);
+      console.log(data.src);
+      setResume(data.src);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleUpload = async (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append('resume', file);
-      const {
-        data: { src },
-      } = await post('jobs/uploadResume', formData);
-      setResume(src);
+      const response = await post(
+        'jobs',
+        {
+          title,
+          company,
+          resume: resumeSrc,
+        },
+        headers
+      );
+      console.log(response);
     } catch (err) {
-      resume = null;
       console.log(err);
     }
   };
@@ -54,24 +64,19 @@ const AddJobs = () => {
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
-        <label className="file-label">Select Resume</label>
+        <label>Select Resume</label>
         <input
-          className="file-input"
           type="file"
           name="resume"
           id="resume"
-          value={resume}
+          value={resumeSrc}
           onChange={handleUpload}
+          onClick={(e) => {
+            e.target.value = null;
+          }}
         />
-        <label className="file-label">Cover Letter</label>
-        <input
-          className="file-input"
-          type="file"
-          name="coverLetter"
-          id="coverLetter"
-          // value={coverLetter}
-          // onChange={handleUpload}
-        />
+        <label>Select Cover Letter</label>
+        <input type="file" name="coverLetter" id="coverLetter" />
       </form>
       <button onClick={handleSubmit}>Submit</button>
     </section>
