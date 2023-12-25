@@ -41,7 +41,6 @@ JWT_LIFETIME = 20d
 _User_ Model, _Jobs_ Model
 
 ### Validation rules 
-
 #### Email Validation Regex
 
 ```regex
