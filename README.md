@@ -8,7 +8,10 @@ Web application to keep track of job application statuses and easily navigate hi
 With the current job market there's a consistent need to update resumes to fit description/keywords of each role. Sometimes we need to apply to 100s of roles because we get an offer and in the midst of all that it's easy to forget the resume we used to apply for a posting. Over time we also loose sight of how much we have improved and by goal is to make the job hunting process more streamline, as well help us all see growth in our skills over the years.
 
 #### Future plans: 
-Adding graphs to easliy visualize the stages of different job applications. My plan is to show different metrics like performance by job title or required skills for a job to help understand the roles that best fit the users current skills and also highlight skills that are missing based on weather the user Interview rounds with companies. 
+Add a keyword scanning feature to the application. This feature would help users match their skills and experiences with specific job descriptions, making it even easier to customize their applications and stand out to potential employers. 
+
+Add graphs to easliy visualize the stages of different job applications. My plan is to show different metrics like performance by job title or required skills for a job to help understand the roles that best fit the users current skills and also highlight skills that are missing based on if the user was able to get to the interview round with companies. 
+
 ### Set up: 
 	- [ ] Fork this github Repo
 	- [ ] Clone your Froked Repo to your local environment 
